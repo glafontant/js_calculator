@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<!--
+  Created using jsbin.com
+  Source can be edited via http://jsbin.com/afaNOYi/1/edit
+-->
+<head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script src="http://documentcloud.github.io/underscore/underscore-min.js"></script>
+<meta charset=utf-8 />
+<title>JS Bin</title>
+
+<style id="jsbin-css">
+.hidden {
+  display: none;
+}
+</style>
+</head>
+<body>
+  <input type="text"> 
+  <input type="text">
+  <input type="submit" value="add">
+  <p id="error" class="hidden"> You must enter both   numbers
+  </p>
+  <p id="result" class="hidden"> The result is <span></span>   
+ </p>
+  
+  
+<script>
+var addNumbers = function() {
+  var values = $("input[type=text]").map(function() {
+      return $(this).val(); 
+  }).get();
+ var result =  _.reduce(values, function(memo, num) {
+    return memo + parseInt(num); 
+  }, 0); 
+ var resultInvalid = _.isNaN(result);
+  $("#error").toggle(resultInvalid);
+  console.log(result);
+  $("#result").toggle(!resultInvalid);
+  $("#result span").text(result);
+};
+
+
+var addNumbersOnSubmit = function() {
+  $("input[type=submit]").click(addNumbers);
+};
+$(document).ready(addNumbersOnSubmit);
+</script>
+</body>
+</html>
